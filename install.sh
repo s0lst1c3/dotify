@@ -1,0 +1,1 @@
+cat dotify.txt >> ~/.bashrc

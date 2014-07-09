@@ -1,0 +1,14 @@
+function dotify {
+
+	echo "Hi there $(whoami)!"
+	echo -n "Please enter your github user name and press [ENTER]: "
+	read dgit_user
+	echo "Great! Now enter the name of the git repo where you keep your dotfiles."
+	echo -n "Please enter name of dotfiles repo and press [ENTER]: "
+	read dgit_repo
+	echo
+
+	for host in "$@"; do
+		ssh -t "$(whoami)@$host" "rm -rf labrynth && git clone git@github.com:jgr68/labrynth && mv labrynth/dotfile-payload.sh . && rm -rf labrynth && ./dotfile-payload.sh -r $dgit_repo -g $dgit_user && yes | rm ~/dotfile-payload.sh"
+	done	
+}
